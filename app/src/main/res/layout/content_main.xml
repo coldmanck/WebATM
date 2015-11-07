@@ -9,4 +9,45 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context="coldmanck.webatm.MainActivity">
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_spinner"
+        android:layout_alignParentLeft="true"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cash_edittext"
+        android:layout_toRightOf="@id/my_spinner"/>
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bank_number"
+        android:layout_below="@id/cash_edittext" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/text_if_internal"
+        android:text="@string/text_if_internal"
+        android:layout_below="@id/bank_number" />
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/if_internal"
+        android:layout_below="@id/bank_number"
+        android:layout_toRightOf="@id/text_if_internal" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
+        android:id="@+id/submit_button"
+        android:layout_below="@id/bank_number"
+        android:layout_alignParentRight="true" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/main_text"
+        android:layout_below="@id/submit_button" />
+
 </RelativeLayout>

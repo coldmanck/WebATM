@@ -44,12 +44,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public static final String serverIp = "192.168.1.102";
     public static final int port = 8004;
+    public static Socket socket;
+    public static BufferedReader in = null;
+    public static PrintWriter out = null;
 
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-    private static final String EXTRA_MESSAGE = "coldmanck.webatm.EXTRA_MESSAGE";
+    public static final String EXTRA_MESSAGE = "coldmanck.webatm.EXTRA_MESSAGE";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -99,6 +102,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        mEmailView.setText("coldmanck@gmail.com");
+        mPasswordView.setText("123456");
+
     }
 
     private void populateAutoComplete() {
@@ -305,9 +312,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        private String cash;
 
-        BufferedReader in = null;
-        PrintWriter out = null;
+
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -319,13 +326,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                Socket socket = new Socket(serverIp, port);
+                socket = new Socket(serverIp, port);
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(new BufferedWriter (new OutputStreamWriter(socket.getOutputStream())),true);
                 out.println(mEmail);
                 out.println(mPassword);
+                cash = in.readLine();
 
-                if(in.readLine().equals("1"))
+                if(!cash.equals("-1"))
                     return true;
             }
             catch (IOException e) {
@@ -347,7 +355,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 finish();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                String[] info = {mEmailView.getText().toString(), mPasswordView.getText().toString()};
+                String[] info = {mEmail, mPassword, cash};
                 intent.putExtra(EXTRA_MESSAGE, info);
 
                 startActivity(intent);

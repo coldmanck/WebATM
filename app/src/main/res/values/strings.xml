@@ -14,4 +14,10 @@
         completions."
     </string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="submit_button">Submit</string>
+    <string name="cash_hint">EX: 500, 1000...</string>
+    <string name="bank_number_hint">Bank no., coldman519@yahoo.com.tw</string>
+    <string name="text_if_internal">Internal?</string>
+
+
 </resources>
