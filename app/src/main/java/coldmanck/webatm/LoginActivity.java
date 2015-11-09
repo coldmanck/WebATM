@@ -29,6 +29,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.*;
 import java.net.*;
@@ -42,7 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    public static final String serverIp = "192.168.1.102";
+    public static final String serverIp = "192.168.0.101";
     public static final int port = 8004;
     public static Socket socket;
     public static BufferedReader in = null;
@@ -85,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    attemptLogin("login");
                     return true;
                 }
                 return false;
@@ -96,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptLogin("login");
             }
         });
 
@@ -157,7 +158,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptLogin(String choice) {
         if (mAuthTask != null) {
             return;
         }
@@ -310,11 +311,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-        private String cash;
-
-
+        protected final String mEmail;
+        protected final String mPassword;
+        protected String cash;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -333,17 +332,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 out.println(mPassword);
                 cash = in.readLine();
 
-                if(!cash.equals("-1"))
+                if(cash.equals("-1"))
+                    return false;
+                else
                     return true;
             }
             catch (IOException e) {
                 return false;
             }
-
-            // TODO: register the new account here.
-            // return true;
-
-            return false;
         }
 
         @Override

@@ -9,13 +9,18 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context="coldmanck.webatm.MainActivity">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/count_down" />
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/my_spinner"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/count_down"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cash_edittext"
         android:layout_toRightOf="@id/my_spinner"/>
@@ -37,6 +42,13 @@
         android:id="@+id/if_internal"
         android:layout_below="@id/bank_number"
         android:layout_toRightOf="@id/text_if_internal" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_button"
+        android:id="@+id/exit_button"
+        android:layout_below="@id/bank_number"
+        android:layout_toRightOf="@id/if_internal" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
