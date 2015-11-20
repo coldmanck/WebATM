@@ -43,7 +43,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    public static final String serverIp = "192.168.0.101";
+    public static final String serverIp = "172.18.21.158";
     public static final int port = 8004;
     public static Socket socket;
     public static BufferedReader in = null;
